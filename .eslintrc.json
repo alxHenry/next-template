@@ -4,16 +4,21 @@
     "es6": true
   },
   "extends": [
-    "plugin:prettier/recommended",
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/eslint-recommended"
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint",
+    "prettier/react"
   ],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
   },
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -23,10 +28,37 @@
   },
   "plugins": ["react", "react-hooks", "@typescript-eslint"],
   "rules": {
-    "react/prop-types": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_", "ignoreRestSiblings": true }
+    ],
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-var-requires": "off",
     "react/display-name": "off",
+    "react/jsx-fragments": "error",
+    "react/prop-types": "off",
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "import/dynamic-import-chunkname": [
+      "error",
+      {
+        "webpackChunknameFormat": "(1-auth|2-polyfill|3-render|4-(feat|page))-[^\"'A-Z]+"
+      }
+    ],
+    "import/export": "off",
+    "import/extensions": ["error", "never", { "svg": "always" }],
+    "import/named": "off",
+    "import/no-mutable-exports": "error",
+    "import/no-named-as-default": "off",
+    "import/no-unresolved": "off",
+    "import/no-useless-path-segments": ["error", { "noUselessIndex": true }]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   },
   "ignorePatterns": ["node_modules/"]
 }

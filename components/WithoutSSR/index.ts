@@ -1,1 +1,1 @@
-export { default } from './WithoutSSR';
+export { default } from "./WithoutSSR";

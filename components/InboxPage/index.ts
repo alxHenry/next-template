@@ -1,1 +1,1 @@
-export { default } from './InboxPage';
+export { default } from "./InboxPage";
