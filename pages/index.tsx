@@ -1,14 +1,11 @@
-import Head from "next/head";
+import React, { FC } from "react";
+import PageLayout from "../components/PageLayout";
+import SharedHeader from "../components/SharedHeader/SharedHeader";
 
-const Home = () => (
+const Home: FC = () => (
   <>
-    <Head>
-      <script
-        src="https://kit.fontawesome.com/a14419ba0b.js"
-        crossOrigin="anonymous"
-      ></script>
-    </Head>
-
+    <SharedHeader />
+    <PageLayout />
   </>
 );
 
