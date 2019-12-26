@@ -16,10 +16,10 @@ import {
 } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import React, { FC, useCallback, useState } from "react";
+import Link from "next/link";
+import React, { FC, ReactNode, useCallback, useState } from "react";
+import { useAppNavigationOptions } from "./hooks";
 
 const drawerWidth = 240;
 
@@ -57,7 +57,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const PageLayout: FC = () => {
+export interface PageLayoutProps {
+  readonly name: string;
+  readonly children: ReactNode;
+}
+
+const PageLayout: FC<PageLayoutProps> = ({ name, children }) => {
+  const navigationOptions = useAppNavigationOptions();
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -66,20 +72,20 @@ const PageLayout: FC = () => {
     setMobileOpen(!mobileOpen);
   }, [mobileOpen]);
 
+  const menuItems = navigationOptions.map(option => (
+    <Link key={option.key} href={option.href}>
+      <ListItem button>
+        <ListItemIcon>{option.onRenderIcon()}</ListItemIcon>
+        <ListItemText primary={option.name} />
+      </ListItem>
+    </Link>
+  ));
+
   const drawer = (
     <div>
       <div className={classes.toolbar} />
       <Divider />
-      <List>
-        {["Item 1", "Item 2", "Item 3"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+      <List>{menuItems}</List>
     </div>
   );
 
@@ -98,7 +104,7 @@ const PageLayout: FC = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Home
+            {name}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -130,7 +136,7 @@ const PageLayout: FC = () => {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        Hello World
+        {children}
       </main>
     </div>
   );
