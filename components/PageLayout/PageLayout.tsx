@@ -20,7 +20,7 @@ import Typography from "@material-ui/core/Typography";
 import MenuIcon from "@material-ui/icons/Menu";
 import Link from "next/link";
 import React, { FC, ReactNode, useCallback, useState } from "react";
-import LogInOutButton from "../LogInOutButton";
+import LogOutButton from "../LogOutButton";
 import { useAppNavigationOptions } from "./hooks";
 
 const drawerWidth = 240;
@@ -105,14 +105,14 @@ const PageLayout: FC<PageLayoutProps> = ({ name, children }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Grid container>
+          <Grid container justify="space-between">
             <Grid item>
               <Typography variant="h6" noWrap>
                 {name}
               </Typography>
             </Grid>
-            <Grid item xs={2} style={{ minWidth: "96px" }}>
-              <LogInOutButton />
+            <Grid item xs={1} style={{ minWidth: "96px" }}>
+              <LogOutButton />
             </Grid>
           </Grid>
         </Toolbar>
