@@ -1,12 +1,16 @@
 import React, { FC } from "react";
+import Auth0Provider from "../components/Auth0Provider";
 import HomePage from "../components/HomePage";
+import WithAuth from "../components/WithAuth";
 import WithoutSSR from "../components/WithoutSSR";
 
-// Without SSR because I don't want to fight material ui server side rendered
-// stylesheets right now. that will require extra config with next.js
 const Home: FC = () => (
   <WithoutSSR>
-    <HomePage />
+    <Auth0Provider>
+      <WithAuth>
+        <HomePage />
+      </WithAuth>
+    </Auth0Provider>
   </WithoutSSR>
 );
 

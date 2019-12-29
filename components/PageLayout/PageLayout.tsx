@@ -2,6 +2,7 @@ import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
+import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
@@ -19,6 +20,7 @@ import Typography from "@material-ui/core/Typography";
 import MenuIcon from "@material-ui/icons/Menu";
 import Link from "next/link";
 import React, { FC, ReactNode, useCallback, useState } from "react";
+import LogInOutButton from "../LogInOutButton";
 import { useAppNavigationOptions } from "./hooks";
 
 const drawerWidth = 240;
@@ -103,9 +105,16 @@ const PageLayout: FC<PageLayoutProps> = ({ name, children }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            {name}
-          </Typography>
+          <Grid container>
+            <Grid item>
+              <Typography variant="h6" noWrap>
+                {name}
+              </Typography>
+            </Grid>
+            <Grid item xs={2} style={{ minWidth: "96px" }}>
+              <LogInOutButton />
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
